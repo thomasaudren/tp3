@@ -1,12 +1,12 @@
 package UDP;
 
+
 import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 public class Admin {
 	
@@ -41,13 +41,21 @@ public class Admin {
 	 */
 	public static void main(String[] args) {
 		
-		String[] params = new String[2];
-		params[0] = "coucou";
-		params[1] = "hello";
-		Admin a = new Admin("setfdg", params);
-		a.affiche();
+		String[] params = new String[3];
+		params[0] = "marie";
+		params[1] = "COUCOU";
+		params[2] = "f";
+		Admin a = new Admin("ajoutUtilisateur", params);
+		//a.affiche();
+		String message = new XMLOutputter().outputString(a.document);
 		
+
+		ApiUdp u = new ApiUdp();
+		u.iniSend(message, "");
+		u.write();
+		u.send();
+		u.close();
+	    }
 
 	}
 
-}

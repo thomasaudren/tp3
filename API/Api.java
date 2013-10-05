@@ -78,7 +78,7 @@ public class Api {
 		return res;
 	}
 	
-	private void ajoutUtilisateur(String pseudo, String password, String sexe)
+	public void ajoutUtilisateur(String pseudo, String password, String sexe)
 	{	sexe = sexe.toUpperCase();
 		List listUsers = this.racine.getChildren("Utilisateur");
 		Iterator i = listUsers.iterator();
@@ -129,14 +129,14 @@ public class Api {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		Api a = new Api("Utilisateurs.xml");
-		System.out.println(a.listUtilisateurs(""));
-		a.ajoutUtilisateur("ouiiii44", "coucou", "m");
-		System.out.println(a.listUtilisateurs(""));
-		a.suprimeUtilisateur("ouiiii");
-		System.out.println(a.listUtilisateurs(""));
-		a.save();
-	}
+//	public static void main(String[] args) {
+//		Api a = new Api("Utilisateurs.xml");
+//		System.out.println(a.listUtilisateurs(""));
+//		a.ajoutUtilisateur("ouiiii44", "coucou", "m");
+//		System.out.println(a.listUtilisateurs(""));
+//		a.suprimeUtilisateur("ouiiii");
+//		System.out.println(a.listUtilisateurs(""));
+//		a.save();
+//	}
 
 }
