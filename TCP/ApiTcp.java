@@ -95,19 +95,26 @@ public class ApiTcp {
 		    System.exit(-1);
 		}
 	}
+	public void serveurTcp(){
+		this.iniReceive();
+		this.attentClient();
+		this.assocFlux();
+	}
+	public void clientTcp(String host){
+		this.iniSend(host);
+		this.assocFlux();
+	}
+	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		ApiTcp u = new ApiTcp();
 		//test recoi
-//		u.iniReceive();
-//		u.attentClient();
-//		u.assocFlux();
+//		u.serveurTcp();
 //		u.receive();
 		//test envoi
-		u.iniSend("");
-		u.assocFlux();
+		u.clientTcp("");
 		u.send("coucou");
 		u.close();
 
