@@ -61,7 +61,6 @@ public class ServeurTCP {
 	    System.err.println("Erreur lors de l'envoi");
 	    System.exit(-1);
 	}
- 
 	// Lecture de 'Au revoir'
 	try {
 	    message = input.readLine();

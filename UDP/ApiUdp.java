@@ -106,10 +106,9 @@ public class ApiUdp {
 //		a.setMessage("marie");
 //		a.send();
 		//test receive
-		
-		a.iniReceive();
-		a.receive();
-		
+//		a.iniReceive();
+//		a.receive();
+	
 		a.close();
 		
 		

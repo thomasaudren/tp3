@@ -35,32 +35,39 @@ public class Serveur {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			String meth = racine.getAttributeValue("nom");
-			Object[] params = racine.getChildren("arg").toArray();
 			Api a = new Api("Utilisateurs.xml");
-			Method m;
-			try {
-				Class[] classParam = new Class[]{String.class,String.class,String.class };
-				m = a.getClass().getMethod(meth,classParam );
-				m.invoke(a, "marie", "coucou", "f");
-			} catch (NoSuchMethodException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (SecurityException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
+			//authentification
+			String id = racine.getAttributeValue("id");
+			String psw = racine.getAttributeValue("psw");
+
+			if(a.isAdmin(id,psw)){
+				System.out.println("est un admin");
+				String meth = racine.getAttributeValue("nom");
+				Object[] params = racine.getChildren("arg").toArray();
+				
+				Method m;
+				try {
+					Class[] classParam = new Class[]{String.class };
+					m = a.getClass().getMethod(meth,classParam );
+					System.out.println(m.invoke(a, ""));
+				} catch (NoSuchMethodException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SecurityException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			////////////////////////////////////////////////////////////
 		
 	 

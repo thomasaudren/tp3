@@ -105,7 +105,9 @@ public class Api {
 		else{
 			System.out.println("Pseudo deja prit.");
 		}
+		this.save();
 	}
+	
 	public void suprimeUtilisateur(String pseudo){
 		List listUsers = this.racine.getChildren("Utilisateur");
 		Iterator i = listUsers.iterator();
@@ -117,6 +119,7 @@ public class Api {
 				res = false;
 			}
 		}
+		this.save();
 	}
 	public void save(){
 		 try
@@ -126,10 +129,26 @@ public class Api {
 	      }
 	      catch (java.io.IOException e){}
 	}
+	
+	public boolean isAdmin(String id, String psw) {
+		Boolean res = false;
+		List listUsers = this.racine.getChildren("Utilisateur");
+		Iterator i = listUsers.iterator();
+		while(!res && i.hasNext()){
+			Element courant = (Element)i.next();
+			if(id.equals(courant.getChildText("pseudo"))){
+				if(psw.equals(courant.getChildText("password"))){
+					res = true;
+				}
+			}
+		}
+		return res;
+	}
+	
 	/**
 	 * @param args
 	 */
-//	public static void main(String[] args) {
+	public static void main(String[] args) {
 //		Api a = new Api("Utilisateurs.xml");
 //		System.out.println(a.listUtilisateurs(""));
 //		a.ajoutUtilisateur("ouiiii44", "coucou", "m");
@@ -137,6 +156,8 @@ public class Api {
 //		a.suprimeUtilisateur("ouiiii");
 //		System.out.println(a.listUtilisateurs(""));
 //		a.save();
-//	}
+	}
+
+	
 
 }
