@@ -68,7 +68,7 @@ public class ApiTcp {
 		}
 	}
 	
-	public void receive(){
+	public String receive(){
 		String message = null;
 		try {
 		    message = input.readLine();
@@ -76,7 +76,7 @@ public class ApiTcp {
 		    System.err.println("Erreur lors de la lecture");
 		    System.exit(-1);
 		}
-		System.out.println("Lu: " + message);
+		return message;
 	}
 	
 	public void close(){

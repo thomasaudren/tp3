@@ -130,7 +130,7 @@ public class Api {
 	      catch (java.io.IOException e){}
 	}
 	
-	public boolean isAdmin(String id, String psw) {
+	public boolean isUser(String id, String psw) {
 		Boolean res = false;
 		List listUsers = this.racine.getChildren("Utilisateur");
 		Iterator i = listUsers.iterator();
@@ -139,6 +139,23 @@ public class Api {
 			if(id.equals(courant.getChildText("pseudo"))){
 				if(psw.equals(courant.getChildText("password"))){
 					res = true;
+				}
+			}
+		}
+		return res;
+	}
+	
+	public boolean isAdmin(String id, String psw) {
+		Boolean res = false;
+		List listUsers = this.racine.getChildren("Utilisateur");
+		Iterator i = listUsers.iterator();
+		while(!res && i.hasNext()){
+			Element courant = (Element)i.next();
+			if(courant.getAttributeValue("type").equals("admin")){
+				if(id.equals(courant.getChildText("pseudo"))){
+					if(psw.equals(courant.getChildText("password"))){
+						res = true;
+					}
 				}
 			}
 		}

@@ -42,7 +42,6 @@ public class Serveur {
 			String psw = racine.getAttributeValue("psw");
 
 			if(a.isAdmin(id,psw)){
-				System.out.println("est un admin");
 				String meth = racine.getAttributeValue("nom");
 				Object[] params = racine.getChildren("arg").toArray();
 				
