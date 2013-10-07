@@ -21,7 +21,7 @@ public class Client {
 	}
 	
 	public void send(String message){
-		this.apiTcp.send(message);
+			this.apiTcp.send(message);
 	}
 	
 	public void connection(){
@@ -33,6 +33,7 @@ public class Client {
 		racine.setAttribute(pseudo);
 		Attribute password = new Attribute("psw",this.psw);
 		racine.setAttribute(password);
+		document = new Document(racine);
 		connectionXML = new XMLOutputter().outputString(document);
 		this.send(connectionXML);
 	}
@@ -51,7 +52,9 @@ public class Client {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Client c = new Client("ouiiii44", "coucou", "");
+		c.connection();
+		c.send("coucou c est moi\n");
 
 	}
 

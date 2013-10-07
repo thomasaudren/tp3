@@ -59,7 +59,7 @@ public class ApiTcp {
 	}
 	
 	public void send(String message){
-		System.out.println("Envoi: " + message);
+		System.out.println(message);
 		try {
 		    this.output.println(message);
 		} catch(Exception e) {
@@ -69,11 +69,21 @@ public class ApiTcp {
 	}
 	
 	public String receive(){
-		String message = null;
+		String message = "";
 		try {
-		    message = input.readLine();
+			boolean test = true;
+			while (test) {
+				String ligne = input.readLine();
+				if(!ligne.equals("")){
+					message += ligne;
+				}
+				else{
+					test = false;
+				}
+			}
+		    
 		} catch(Exception e) {
-		    System.err.println("Erreur lors de la lecture");
+		    System.err.println(message+" Erreur lors de la lecture "+e.getMessage());
 		    System.exit(-1);
 		}
 		return message;
@@ -104,6 +114,7 @@ public class ApiTcp {
 		this.iniSend(host);
 		this.assocFlux();
 	}
+	
 	
 	/**
 	 * @param args

@@ -24,7 +24,8 @@ public class Serveur {
 		this.apiTcp.serveurTcp();
 	}
 	
-	public void authorize(){
+	public boolean authorize(){
+		boolean res = false;
 		String connection =  this.receive();
 		
 		SAXBuilder builder = new SAXBuilder();
@@ -47,7 +48,13 @@ public class Serveur {
 		
 		if(!this.api.isUser(id, psw)){
 			this.close();
+			System.out.println(id+" ne peut pas se loger");
 		}
+		else{
+			System.out.println(id+" est loguer");
+			res = true;
+		}
+		return res;
 	}
 	
 	public void send(String message){
@@ -66,7 +73,11 @@ public class Serveur {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Serveur s = new Serveur();
+		if(s.authorize()){
+			System.out.println(s.receive());
+		}
+		
 
 	}
 
