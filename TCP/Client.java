@@ -54,6 +54,11 @@ public class Client {
 	public static void main(String[] args) {
 		Client c = new Client("ouiiii44", "coucou", "");
 		c.connection();
+		if(c.receive().equals("-1")){
+			c.close();
+			System.out.println("mauvaise connection");
+			System.exit(-1);
+		}
 		c.send("coucou c est moi\n");
 
 	}

@@ -61,9 +61,11 @@ public class ApiTcp {
 	public void send(String message){
 		System.out.println(message);
 		try {
+			/*if(this.socket != null)
+				System.out.println("client: "+this.receive());*/
 		    this.output.println(message);
 		} catch(Exception e) {
-		    System.err.println("Erreur lors de l'envoi");
+		    System.err.println("Erreur lors de l'envoi "+e.getMessage());
 		    System.exit(-1);
 		}
 	}
@@ -83,9 +85,10 @@ public class ApiTcp {
 			}
 		    
 		} catch(Exception e) {
-		    System.err.println(message+" Erreur lors de la lecture "+e.getMessage());
-		    System.exit(-1);
-		}
+		    //System.err.println(" Erreur lors de la lecture "+e.getMessage());
+		    //System.exit(-1);
+		    return "-1";
+		  }
 		return message;
 	}
 	
@@ -115,7 +118,20 @@ public class ApiTcp {
 		this.assocFlux();
 	}
 	
+	/////
 	
+	public Socket getSocket() {
+		return socket;
+	}
+
+	public ServerSocket getServerSocket() {
+		return serverSocket;
+	}
+
+	public Socket getSocketClient() {
+		return socketClient;
+	}
+/////
 	/**
 	 * @param args
 	 */
@@ -126,6 +142,7 @@ public class ApiTcp {
 //		u.receive();
 		//test envoi
 		u.clientTcp("");
+		System.out.println(u.receive());
 		u.send("coucou");
 		u.close();
 

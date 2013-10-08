@@ -12,7 +12,7 @@ import org.jdom2.input.SAXBuilder;
 import API.Api;
 import UDP.ApiUdp;
 
-public class Serveur {
+public class Serveur  extends Thread{
 	private String id = null;
 	private String psw = null;
 	private ApiTcp apiTcp = null;
@@ -47,6 +47,12 @@ public class Serveur {
 		String psw = racine.getAttributeValue("psw");
 		
 		if(!this.api.isUser(id, psw)){
+			/*try {
+				this.apiTcp.getSocketClient().close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
 			this.close();
 			System.out.println(id+" ne peut pas se loger");
 		}
@@ -68,17 +74,26 @@ public class Serveur {
 	public void close(){
 		this.apiTcp.close();
 	}
+	
+	public ApiTcp getApi(){
+		return this.apiTcp;
+	}
 
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		Serveur s = new Serveur();
 		if(s.authorize()){
 			System.out.println(s.receive());
-		}
+		}*/
 		
-
+	  @Override
+	  public void run(){
+		if(this.authorize()){
+			System.out.println(this.receive());
+		}
 	}
+
 
 }

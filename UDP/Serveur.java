@@ -13,10 +13,11 @@ import org.jdom2.input.SAXBuilder;
 
 import API.Api;
 
-public class Serveur {
+public class Serveur extends Thread{
+	private static ApiUdp u = new ApiUdp();
 
-	public static void main(String[] args) {
-		ApiUdp u = new ApiUdp();
+
+	public void  UdpOn() {
 		u.iniReceive();
 	 
 		String texte = u.receive();
@@ -73,6 +74,11 @@ public class Serveur {
 			
 			u.close();
 	    }
+	
+	@Override
+	  public void run() {
+	    this.UdpOn();
+	  }
 	 
 
 }
