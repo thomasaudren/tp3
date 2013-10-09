@@ -3,6 +3,7 @@ package TCP;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.Socket;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -15,13 +16,14 @@ import UDP.ApiUdp;
 public class Serveur  extends Thread{
 	private String id = null;
 	private String psw = null;
-	private ApiTcp apiTcp = null;
+	private static ApiTcp apiTcp = new ApiTcp();
 	private static Api api = new Api("Utilisateurs.xml");
 	
 
 	public Serveur() {
-		this.apiTcp = new ApiTcp();
 		this.apiTcp.serveurTcp();
+		Serveur s = new Serveur();
+		s.start();
 	}
 	
 	public boolean authorize(){
@@ -90,9 +92,11 @@ public class Serveur  extends Thread{
 		
 	  @Override
 	  public void run(){
+		  System.out.println("safgdr");
 		if(this.authorize()){
+			System.out.println(this.apiTcp.getSocketClient().getInetAddress()+" "+this.apiTcp.getSocketClient().getPort());
 			System.out.println(this.receive());
-		}
+	  	}
 	}
 
 

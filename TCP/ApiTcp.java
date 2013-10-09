@@ -32,6 +32,7 @@ public class ApiTcp {
 	public void iniReceive() {
 		try {	
 		    this.serverSocket = new ServerSocket(this.numeroPort);
+		    System.out.println("Lancement du serveur TCP");
 		} catch(Exception e) {
 			System.err.println("Creation socket impossible "+e.getMessage());
 		    System.exit(-1);
@@ -59,7 +60,7 @@ public class ApiTcp {
 	}
 	
 	public void send(String message){
-		System.out.println(message);
+		System.out.print(message);
 		try {
 			/*if(this.socket != null)
 				System.out.println("client: "+this.receive());*/
@@ -110,8 +111,11 @@ public class ApiTcp {
 	}
 	public void serveurTcp(){
 		this.iniReceive();
-		this.attentClient();
-		this.assocFlux();
+		while (true) {
+			this.attentClient();
+			this.assocFlux();
+			System.out.println("nouveau thread "+this.getSocketClient().toString());
+		}
 	}
 	public void clientTcp(String host){
 		this.iniSend(host);
@@ -131,7 +135,25 @@ public class ApiTcp {
 	public Socket getSocketClient() {
 		return socketClient;
 	}
-/////
+	
+	
+public static int getNumeroport() {
+		return numeroPort;
+	}
+
+	public String getHost() {
+		return host;
+	}
+
+	public BufferedReader getInput() {
+		return input;
+	}
+
+	public PrintWriter getOutput() {
+		return output;
+	}
+
+	/////
 	/**
 	 * @param args
 	 */

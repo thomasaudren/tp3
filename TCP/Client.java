@@ -8,7 +8,7 @@ import org.jdom2.output.XMLOutputter;
 public class Client {
 	private String id = null;
 	private String psw = null;
-	private ApiTcp apiTcp = null;
+	private static ApiTcp apiTcp = new ApiTcp();;
 	
 	
 	
@@ -16,7 +16,6 @@ public class Client {
 	public Client(String id, String psw, String host) {
 		this.id = id;
 		this.psw = psw;
-		this.apiTcp = new ApiTcp();
 		this.apiTcp.clientTcp(host);
 	}
 	
@@ -52,15 +51,25 @@ public class Client {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Client c = new Client("ouiiii44", "coucou", "");
+		Client c = new Client("ouiiii445", "coucou", "");
+		Client c2 = new Client("admin", "admin", "");
+		c2.connection();
 		c.connection();
-		if(c.receive().equals("-1")){
+		//c.send("coucou c est moi\n");
+		String message = c.receive();
+		/*System.out.println(message);
+		 message = c2.receive();*/
+		System.out.println(message);
+		if(message.equals("-1")){
 			c.close();
 			System.out.println("mauvaise connection");
 			System.exit(-1);
 		}
-		c.send("coucou c est moi\n");
-
+		
+		System.out.println(c.apiTcp.getSocket().getInetAddress()+" "+
+				c.apiTcp.getSocket().getLocalPort()+" "+
+				c.apiTcp.getSocket().getPort());
+		c.close();
 	}
 
 }

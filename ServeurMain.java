@@ -10,8 +10,8 @@ public class ServeurMain {
 		UDP.Serveur udp = new UDP.Serveur();
 		udp.start();
 		
-		TCP.Serveur[] tcp = {new TCP.Serveur() };
-		tcp[0].start();
+		TCP.Serveur tcp = new TCP.Serveur() ;
+		tcp.start();
 		/*while(true){
 			if(tcp[tcp.length-1].getApi().getSocketClient() != null){
 				tcp[tcp.length] = new TCP.Serveur();
