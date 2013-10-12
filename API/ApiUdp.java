@@ -1,4 +1,5 @@
-package UDP;
+package API;
+
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -97,22 +98,5 @@ public class ApiUdp {
 		this.write();
 	}
 
-	public static void main(String[] args) {
-		ApiUdp a = new ApiUdp();
-		
-		//test send
-//		a.iniSend("thomas","");
-//		a.write();
-//		a.setMessage("marie");
-//		a.send();
-		//test receive
-//		a.iniReceive();
-//		a.receive();
-	
-		a.close();
-		
-		
-
-	}
 
 }

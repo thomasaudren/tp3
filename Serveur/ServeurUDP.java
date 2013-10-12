@@ -1,4 +1,5 @@
-package UDP;
+package Serveur;
+
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -12,8 +13,9 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
 import API.Api;
+import API.ApiUdp;
 
-public class Serveur extends Thread{
+public class ServeurUDP extends Thread{
 	private static ApiUdp u = new ApiUdp();
 
 
