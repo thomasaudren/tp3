@@ -91,6 +91,7 @@ public class Api {
 			}
 		}
 		if(res){
+			//Ajout de l utilisateur dans le document
 			Element child = new Element("Utilisateur");
 			Element childPseudo = new Element("pseudo");
 			Element childPassword = new Element("password");
@@ -101,10 +102,16 @@ public class Api {
 			child.addContent(childPseudo);
 			child.addContent(childPassword);
 			this.racine.addContent(child);
+			
+			//Creation du repertoir de l utilisateur
+			File rep = new File("serveur_"+pseudo);
+			rep.mkdirs();
+			System.out.println("Utilisateur cree");
 		}
 		else{
 			System.out.println("Pseudo deja prit.");
 		}
+		//sauvagarde dans le fichier
 		this.save();
 	}
 	
@@ -117,6 +124,10 @@ public class Api {
 			if(pseudo.equals(courant.getChildText("pseudo"))){
 				courant.detach();
 				res = false;
+				//Supprime le repertoir
+				File rep = new File(pseudo);
+				rep.delete();
+				System.out.println("Utilisateur supprime");
 			}
 		}
 		this.save();
@@ -162,19 +173,13 @@ public class Api {
 		return res;
 	}
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-//		Api a = new Api("Utilisateurs.xml");
-//		System.out.println(a.listUtilisateurs(""));
-//		a.ajoutUtilisateur("ouiiii44", "coucou", "m");
-//		System.out.println(a.listUtilisateurs(""));
-//		a.suprimeUtilisateur("ouiiii");
-//		System.out.println(a.listUtilisateurs(""));
-//		a.save();
+	public String listeFichier(String path){
+		String res = "";
+		File rep = new File(path);
+		String[] tab = rep.list();
+		for (String nom : tab) {
+			res += nom+"\n";
+		}
+		return res;
 	}
-
-	
-
 }

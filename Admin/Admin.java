@@ -48,13 +48,16 @@ public class Admin {
 	 */
 	public static void main(String[] args) {
 		
-		String[] params = new String[3];
+		/*String[] params = new String[3];
 		params[0] = "marie";
 		params[1] = "COUCOU";
 		params[2] = "f";
-//		String[] params = new String[1];
-//		params[0] = "";
-		Admin a = new Admin("ajoutUtilisateur", params,"admin","admin");
+		Admin a = new Admin("ajoutUtilisateur", params,"admin","admin");*/
+		
+		String[] params = new String[1];
+		params[0] = "marie";
+		Admin a = new Admin("suprimeUtilisateur", params,"admin","admin");
+		
 		//a.affiche();
 		String message = new XMLOutputter().outputString(a.document);
 		System.out.println(message);

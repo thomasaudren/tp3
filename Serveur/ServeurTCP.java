@@ -1,6 +1,8 @@
 package Serveur;
 
 import java.net.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.io.*;
 
 import org.jdom2.Document;
@@ -80,7 +82,45 @@ public class ServeurTCP extends Thread {
 		 System.out.println("fin");
 		return res;
 	}
+ 
+  public void ajouterFichier(String msg){
 
+		SAXBuilder builder = new SAXBuilder();
+		Document anotherDocument = null;
+		Element racine = new Element("vide");
+		try {
+			Matcher junkMatcher = (Pattern.compile("^([\\W]+)<")).matcher( msg.trim() );
+			msg = junkMatcher.replaceFirst("<");
+			InputStream stream = new ByteArrayInputStream(msg.getBytes("UTF-8"));
+			anotherDocument = builder.build(stream);
+			racine = anotherDocument.getRootElement();
+			String id = racine.getAttributeValue("id");
+			String path = racine.getAttributeValue("path");
+			Element etmp = (Element)racine.getChildren("byteString").toArray()[0];
+			String tmp = etmp.getText();
+			System.out.println("serveur_"+path+"   "+tmp);
+			
+			File file = new File("serveur_"+path);
+			
+			file.createNewFile();
+			FileWriter fw = new FileWriter(file, true);
+			BufferedWriter bw = new BufferedWriter ( fw ) ; 
+			//bw.newLine(); 
+			PrintWriter pw = new PrintWriter ( bw ) ; 
+			pw. print ( tmp ) ; 
+			pw. close ( ) ; 
+		} catch (JDOMException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		}
+		
+		
+		
+  }
+  
   public void traitements() {
     try {
       String message = "";
@@ -106,7 +146,7 @@ public class ServeurTCP extends Thread {
     		 System.out.println("");
     	 }
     	 else{
-    		 System.out.println("execution"+ getId());
+    		 this.ajouterFichier(messageClient);
     	 }
      }
      in.close();
